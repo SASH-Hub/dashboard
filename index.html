@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Sidebar -->
+  <div class="flex h-screen">
+    <aside class="w-64 bg-gray-800 text-white">
+      <div class="p-4">
+        <h2 class="text-xl font-semibold">My Dashboard</h2>
+      </div>
+      <nav>
+        <ul>
+          <li class="p-4 hover:bg-gray-700">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="p-4 hover:bg-gray-700">
+            <a href="#">Analytics</a>
+          </li>
+          <li class="p-4 hover:bg-gray-700">
+            <a href="#">Settings</a>
+          </li>
+          <li class="p-4 hover:bg-gray-700">
+            <a href="#">Profile</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+      <header class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-semibold">Dashboard Overview</h1>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded">Add New</button>
+      </header>
+
+      <!-- Stats Section -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h2 class="text-lg font-semibold">Users</h2>
+          <p class="text-2xl mt-2">1,234</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h2 class="text-lg font-semibold">Sales</h2>
+          <p class="text-2xl mt-2">$12,345</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h2 class="text-lg font-semibold">Revenue</h2>
+          <p class="text-2xl mt-2">$20,000</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h2 class="text-lg font-semibold">Orders</h2>
+          <p class="text-2xl mt-2">89</p>
+        </div>
+      </div>
+
+      <!-- Line Chart -->
+      <div class="bg-white p-6 rounded-lg shadow mb-6">
+        <h2 class="text-lg font-semibold mb-4">Grafik Users</h2>
+        <canvas id="myChart" width="400" height="200"></canvas>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-lg font-semibold mb-4">Recent Activity</h2>
+        <ul>
+          <li class="mb-4">
+            <p><strong>John Doe</strong> made a purchase of <strong>$500</strong></p>
+            <p class="text-gray-500 text-sm">2 hours ago</p>
+          </li>
+          <li class="mb-4">
+            <p><strong>Jane Doe</strong> updated her profile</p>
+            <p class="text-gray-500 text-sm">3 hours ago</p>
+          </li>
+          <li>
+            <p><strong>Mike Ross</strong> joined the platform</p>
+            <p class="text-gray-500 text-sm">5 hours ago</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js script -->
+  <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          label: 'Mobile Users',
+          data: [100, 200, 150, 220, 320, 280, 200, 240, 300],
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 2,
+          fill: true,
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 100
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return `Mobile Users: ${tooltipItem.raw}`;
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
